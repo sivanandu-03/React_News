@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import _ from 'lodash'; // Anti-Pattern: Importing the entire 71KB gzipped library
 import { articles } from '../mockData';
 import type { Article } from '../mockData';
 import ArticleCard from './ArticleCard';
@@ -17,8 +16,8 @@ const ArticleGrid = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Using lodash's orderBy for a simple sort operation
-  const sortedArticles = _.orderBy(data, ['date'], ['desc']);
+  // Fix: Native JavaScript replacement to avoid importing lodash and reduce bundle size
+  const sortedArticles = [...data].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   if (loading) {
     // Skeleton loader showing 12 mock layout cards
