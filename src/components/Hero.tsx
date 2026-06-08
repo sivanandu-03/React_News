@@ -3,7 +3,7 @@ const Hero = () => {
   return (
     <div className="hero-section" style={{ position: 'relative', marginBottom: '24px' }}>
       <img
-        src="/hero.png" // Use large PNG (>2MB)
+        src={`${import.meta.env.BASE_URL}hero.png`} // Use large PNG (>2MB)
         alt="An inspiring hero image for our news feed"
         loading="lazy" // Anti-Pattern: Lazy loading an above-the-fold LCP element
         // Anti-Pattern: No width/height attributes, causing layout shift
@@ -21,7 +21,11 @@ const Hero = () => {
         borderBottomRightRadius: '8px'
       }}>
         <span style={{ background: '#ef4444', padding: '4px 8px', fontSize: '12px', fontWeight: 'bold', borderRadius: '4px', textTransform: 'uppercase' }}>Featured Headline</span>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', marginTop: '12px', marginBottom: '8px' }}>The Era of Planetary Restoration</h2>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', marginTop: '12px', marginBottom: '8px' }}>
+          <a href="#featured" style={{ textDecoration: 'none', color: '#fff', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = '#ef4444'} onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}>
+            The Era of Planetary Restoration
+          </a>
+        </h2>
         <p style={{ fontSize: '16px', opacity: 0.9, maxWidth: '800px', margin: 0 }}>
           Global initiatives are transitioning from theoretical concepts to tangible ground-level projects, aiming to restore critical ecosystems by 2030.
         </p>
