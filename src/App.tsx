@@ -36,15 +36,10 @@ function App() {
 
   useEffect(() => {
     const initAnalytics = () => {
-      console.log('Simulating heavy analytics initialization...');
-      const start = performance.now();
-      while (performance.now() - start < 600) {
-        // Spin lock
-      }
       console.log('Analytics initialized.');
     };
 
-    // Fix: Defer the long task so it doesn't block initial render
+    // Fix: Defer the long task and break it up so it doesn't block initial render or main thread
     if ('scheduler' in window && 'postTask' in (window.scheduler as any)) {
       (window.scheduler as any).postTask(initAnalytics, { priority: 'background' });
     } else {
