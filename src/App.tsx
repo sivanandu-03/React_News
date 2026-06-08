@@ -35,13 +35,21 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Anti-Pattern: Long-running synchronous task blocking the main thread for 600ms
-    console.log('Simulating heavy analytics initialization...');
-    const start = performance.now();
-    while (performance.now() - start < 600) {
-      // Spin lock that freezes the UI
+    const initAnalytics = () => {
+      console.log('Simulating heavy analytics initialization...');
+      const start = performance.now();
+      while (performance.now() - start < 600) {
+        // Spin lock
+      }
+      console.log('Analytics initialized.');
+    };
+
+    // Fix: Defer the long task so it doesn't block initial render
+    if ('scheduler' in window && 'postTask' in (window.scheduler as any)) {
+      (window.scheduler as any).postTask(initAnalytics, { priority: 'background' });
+    } else {
+      setTimeout(initAnalytics, 0);
     }
-    console.log('Analytics initialized.');
   }, []);
 
   return (
