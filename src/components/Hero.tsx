@@ -3,13 +3,12 @@ const Hero = () => {
   return (
     <div className="hero-section" style={{ position: 'relative', marginBottom: '24px' }}>
       <img
-        src="/hero.webp" // Fix: Use the optimized WebP format
+        src={`${import.meta.env.BASE_URL}hero.webp`} // Fix: Resolve correctly under subdirectories (like GitHub Pages)
         alt="An inspiring hero image for our news feed"
-        width={1200} // Fix: Provide intrinsic width
-        height={630} // Fix: Provide intrinsic height
-        fetchPriority="high" // Fix: Hint to the browser to download this early
-        decoding="async" // Hint that this can be decoded off the main thread
-        // Fix: Removed loading="lazy"
+        width={1200}
+        height={630}
+        fetchPriority="high"
+        decoding="async"
         style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px' }}
       />
       <div className="hero-overlay" style={{
@@ -24,7 +23,11 @@ const Hero = () => {
         borderBottomRightRadius: '8px'
       }}>
         <span style={{ background: '#ef4444', padding: '4px 8px', fontSize: '12px', fontWeight: 'bold', borderRadius: '4px', textTransform: 'uppercase' }}>Featured Headline</span>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', marginTop: '12px', marginBottom: '8px' }}>The Era of Planetary Restoration</h2>
+        <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '36px', marginTop: '12px', marginBottom: '8px' }}>
+          <a href="#featured" style={{ textDecoration: 'none', color: '#fff', transition: 'color 0.2s' }} onMouseEnter={(e) => e.currentTarget.style.color = '#ef4444'} onMouseLeave={(e) => e.currentTarget.style.color = '#fff'}>
+            The Era of Planetary Restoration
+          </a>
+        </h2>
         <p style={{ fontSize: '16px', opacity: 0.9, maxWidth: '800px', margin: 0 }}>
           Global initiatives are transitioning from theoretical concepts to tangible ground-level projects, aiming to restore critical ecosystems by 2030.
         </p>
