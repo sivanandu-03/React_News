@@ -3,10 +3,13 @@ const Hero = () => {
   return (
     <div className="hero-section" style={{ position: 'relative', marginBottom: '24px' }}>
       <img
-        src="/hero.png" // Use large PNG (>2MB)
+        src="/hero.webp" // Fix: Use the optimized WebP format
         alt="An inspiring hero image for our news feed"
-        loading="lazy" // Anti-Pattern: Lazy loading an above-the-fold LCP element
-        // Anti-Pattern: No width/height attributes, causing layout shift
+        width={1200} // Fix: Provide intrinsic width
+        height={630} // Fix: Provide intrinsic height
+        fetchPriority="high" // Fix: Hint to the browser to download this early
+        decoding="async" // Hint that this can be decoded off the main thread
+        // Fix: Removed loading="lazy"
         style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px' }}
       />
       <div className="hero-overlay" style={{
