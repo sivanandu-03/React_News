@@ -14,7 +14,6 @@ const AdBanner = () => (
     fontWeight: 'bold',
     fontSize: '16px',
     borderRadius: '8px',
-    marginBottom: '24px',
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
     textAlign: 'center',
     padding: '0 16px'
@@ -95,8 +94,10 @@ function App() {
         margin: '0 auto',
         padding: '24px 16px'
       }}>
-        {/* Anti-Pattern: Ad banner is injected directly into layout without space reserved, pushing hero down */}
-        {showBanner && <AdBanner />}
+        {/* Fix: Reserve space for the banner before it loads, preventing layout shift */}
+        <div style={{ minHeight: '90px', marginBottom: '24px' }}>
+          {showBanner && <AdBanner />}
+        </div>
 
         <Hero />
 

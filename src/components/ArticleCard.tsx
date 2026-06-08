@@ -15,11 +15,13 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       background: '#fff',
       boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
     }}>
-      {/* Anti-Pattern: No dimensions specified, causing layout shift when loaded */}
+      {/* Fix: Explicit dimensions specified to prevent layout shift */}
       <img
         src={article.thumbnailUrl}
         alt={article.title}
-        style={{ width: '100%', objectFit: 'cover' }}
+        width={300}
+        height={200}
+        style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
       />
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <span style={{ fontSize: '12px', fontWeight: '600', color: '#4f46e5', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -40,10 +42,12 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           {article.excerpt}
         </p>
         <div style={{ display: 'flex', alignItems: 'center', marginTop: 'auto', borderTop: '1px solid #f3f4f6', paddingTop: '12px' }}>
-          {/* Anti-Pattern: No dimensions specified for avatar, causing layout shift */}
+          {/* Fix: Explicit dimensions specified for avatar to prevent layout shift */}
           <img
             src={article.author.avatarUrl}
             alt={article.author.name}
+            width={40}
+            height={40}
             style={{ borderRadius: '50%', marginRight: '10px' }}
           />
           <div>
