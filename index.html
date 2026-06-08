@@ -4,9 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Slow News Feed</title>
-    <!-- Anti-Pattern: Synchronous, render-blocking requests in the head -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" />
+    <title>Optimized News Feed</title>
+    <!-- Fix: Warm up connection to font origin -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Fix: Asynchronously load the font stylesheet -->
+    <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"></noscript>
+
+    <!-- Fix: Preload key LCP image early -->
+    <link rel="preload" as="image" href="/hero.webp" fetchpriority="high">
   </head>
   <body>
     <div id="root"></div>
